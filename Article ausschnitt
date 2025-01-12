@@ -1,0 +1,5 @@
+<?php 
+            the_excerpt();
+        ?>
+
+//nimmt einen Ausschnitt aus dem verlinkten Article
