@@ -7,3 +7,8 @@ functions.php   = ist die Sammlung der benötigten Functions, wie die zum Laden 
 header.php      = ist der Header der Website.
 index.php       = ist das Grundgerüst der Website.
 single.php      = ist die Seite der einzelnen Blog Article.
+
+
+
+template-parts
+  content-archive.php  = Aufbau der Archive Seite
