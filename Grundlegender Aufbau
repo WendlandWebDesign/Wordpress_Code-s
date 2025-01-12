@@ -1,1 +1,9 @@
-
+404.php         = ist die Error Seite.
+archive.php     = ist die Seite für die Ansammlung der einzelnen Blog Posts.
+blog.php        = ist sorgt dafür, dass der Inhalt der Posts angezeigt wird.
+footer.php      = ist der Footer der Website
+front-page.php  = ist die erste Seite der Website (sozusagen die Homepage).
+functions.php   = ist die Sammlung der benötigten Functions, wie die zum Laden der CSS oder JS Dateien.
+header.php      = ist der Header der Website.
+index.php       = ist das Grundgerüst der Website.
+single.php      = ist die Seite der einzelnen Blog Article.
