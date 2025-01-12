@@ -12,3 +12,4 @@ single.php      = ist die Seite der einzelnen Blog Article.
 
 template-parts
   content-archive.php  = Aufbau der Archive Seite
+  content-article.php  = Zieht den Article und das Article Bild aus der WP Datenbank
