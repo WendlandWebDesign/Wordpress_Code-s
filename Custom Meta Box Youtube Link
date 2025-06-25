@@ -1,0 +1,34 @@
+// Metabox für YouTube-Link bei Beiträgen
+
+function wwd_add_youtube_metabox() {
+    add_meta_box(
+        'wwd_youtube_metabox',
+        'YouTube Video',
+        'wwd_youtube_metabox_callback',
+        'post', // <-- für normale Beiträge
+        'normal',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'wwd_add_youtube_metabox');
+
+function wwd_youtube_metabox_callback($post) {
+    $youtube_url = get_post_meta($post->ID, '_wwd_youtube_url', true);
+    echo '<label for="wwd_youtube_url">YouTube-Link:</label><br>';
+    echo '<input type="text" id="wwd_youtube_url" name="wwd_youtube_url" value="' . esc_attr($youtube_url) . '" style="width:100%;">';
+}
+
+//Feld sichern beim Speichern
+
+function wwd_save_youtube_url($post_id) {
+    if (array_key_exists('wwd_youtube_url', $_POST)) {
+        update_post_meta(
+            $post_id,
+            '_wwd_youtube_url',
+            esc_url_raw($_POST['wwd_youtube_url'])
+        );
+    }
+}
+add_action('save_post', 'wwd_save_youtube_url');
+
+?>
