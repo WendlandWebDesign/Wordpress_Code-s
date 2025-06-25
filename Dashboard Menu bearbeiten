@@ -28,18 +28,3 @@ function wwd_cleanup_admin_bar($wp_admin_bar) {
 add_action('admin_bar_menu', 'wwd_cleanup_admin_bar', 999);
 
 
-
-
-
-// 1. Admin-Menü hinzufügen
-add_action('admin_menu', function () {
-    add_menu_page(
-        'Seitenbilder ändern',
-        'Seitenbilder',
-        'edit_posts', // Redakteur darf das sehen
-        'seitenbilder',
-        'wwd_seitenbilder_callback',
-        'dashicons-format-image',
-        26
-    );
-});
