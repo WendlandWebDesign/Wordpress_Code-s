@@ -1,0 +1,33 @@
+// 2. Media-Uploader aktivieren
+add_action('admin_enqueue_scripts', function ($hook) {
+    if ($hook !== 'toplevel_page_seitenbilder') return;
+    wp_enqueue_media();
+    wp_enqueue_script('wwd-image-uploader', get_template_directory_uri() . '/admin/image-uploader.js', ['jquery'], null, true);
+});
+
+
+//js
+
+jQuery(document).ready(function ($) {
+  $('.wwd-upload-button').click(function (e) {
+    e.preventDefault();
+    const button = $(this);
+    const inputField = button.prev();
+    const preview = button.next();
+
+    const frame = wp.media({
+      title: 'Bild auswählen',
+      multiple: false,
+      library: { type: 'image' },
+      button: { text: 'Bild übernehmen' }
+    });
+
+    frame.on('select', function () {
+      const attachment = frame.state().get('selection').first().toJSON();
+      inputField.val(attachment.url);
+      preview.attr('src', attachment.url).show();
+    });
+
+    frame.open();
+  });
+});
