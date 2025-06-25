@@ -1,0 +1,30 @@
+// Custom Post Type "Events" registrieren
+function wwd_register_event_post_type() {
+    $labels = [
+        'name' => 'Events',
+        'singular_name' => 'Event',
+        'add_new' => 'Neues Event',
+        'add_new_item' => 'Neues Event erstellen',
+        'edit_item' => 'Event bearbeiten',
+        'new_item' => 'Neues Event',
+        'view_item' => 'Event ansehen',
+        'search_items' => 'Events durchsuchen',
+        'not_found' => 'Keine Events gefunden',
+        'not_found_in_trash' => 'Keine Events im Papierkorb',
+        'menu_name' => 'Events',
+    ];
+
+    $args = [
+        'labels' => $labels,
+        'public' => true,
+        'has_archive' => false,
+        'menu_icon' => 'dashicons-calendar-alt',
+        'rewrite' => ['slug' => 'events'],
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+        'show_in_rest' => true, // Für Gutenberg
+        'capability_type' => 'post',
+    ];
+
+    register_post_type('event', $args);
+}
+add_action('init', 'wwd_register_event_post_type');
