@@ -1,0 +1,31 @@
+function wwd_event_custom_fields() {
+    add_meta_box(
+        'event_details',
+        'Event Details',
+        'wwd_event_details_callback',
+        'event',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'wwd_event_custom_fields');
+
+function wwd_event_details_callback($post) {
+    $date = get_post_meta($post->ID, '_event_date', true);
+    $location = get_post_meta($post->ID, '_event_location', true);
+
+    echo '<label>Datum:</label><br>';
+    echo '<input type="date" name="event_date" value="' . esc_attr($date) . '" style="width: 100%;"><br><br>';
+    echo '<label>Ort:</label><br>';
+    echo '<input type="text" name="event_location" value="' . esc_attr($location) . '" style="width: 100%;">';
+}
+
+function wwd_save_event_fields($post_id) {
+    if (array_key_exists('event_date', $_POST)) {
+        update_post_meta($post_id, '_event_date', sanitize_text_field($_POST['event_date']));
+    }
+    if (array_key_exists('event_location', $_POST)) {
+        update_post_meta($post_id, '_event_location', sanitize_text_field($_POST['event_location']));
+    }
+}
+add_action('save_post', 'wwd_save_event_fields');
