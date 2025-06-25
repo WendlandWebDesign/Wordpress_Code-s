@@ -1,0 +1,45 @@
+//Dashboard Menu bearbeiten
+
+add_action('admin_menu', function () {
+    if (current_user_can('editor')) {
+        // Entferne alle anderen Menüpunkte
+        remove_menu_page('index.php'); // Dashboard
+        remove_menu_page('edit.php?post_type=page'); // Seiten
+        remove_menu_page('themes.php'); // Design
+        remove_menu_page('plugins.php'); // Plugins
+        remove_menu_page('tools.php'); // Werkzeuge
+        remove_menu_page('options-general.php'); // Einstellungen
+        remove_menu_page('edit-comments.php'); // Kommentare
+        remove_menu_page('users.php'); // Benutzer
+        remove_menu_page('hostinger.php');
+        remove_menu_page('wpcf7'); //contact form seven
+        remove_menu_page('hostinger');
+
+    }
+});
+
+//Admin Bar Cleanup
+
+function wwd_cleanup_admin_bar($wp_admin_bar) {
+    if (!current_user_can('editor')) return;
+
+    $wp_admin_bar->remove_node('hostinger'); // Hostinger
+}
+add_action('admin_bar_menu', 'wwd_cleanup_admin_bar', 999);
+
+
+
+
+
+// 1. Admin-Menü hinzufügen
+add_action('admin_menu', function () {
+    add_menu_page(
+        'Seitenbilder ändern',
+        'Seitenbilder',
+        'edit_posts', // Redakteur darf das sehen
+        'seitenbilder',
+        'wwd_seitenbilder_callback',
+        'dashicons-format-image',
+        26
+    );
+});
