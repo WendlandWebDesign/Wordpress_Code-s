@@ -1,0 +1,5 @@
+function wpexplorer_excerpt_length( $length ) {
+  $length = 18;
+  return $length;
+}
+add_filter( 'excerpt_length', 'wpexplorer_excerpt_length', PHP_INT_MAX );
