@@ -1,0 +1,69 @@
+// 1. Admin-Menü hinzufügen
+add_action('admin_menu', function () {
+    add_menu_page(
+        'Seitenbilder ändern',
+        'Seitenbilder',
+        'edit_posts', // Redakteur darf das sehen
+        'seitenbilder',
+        'wwd_seitenbilder_callback',
+        'dashicons-format-image',
+        26
+    );
+});
+
+// 2. Media-Uploader aktivieren
+add_action('admin_enqueue_scripts', function ($hook) {
+    if ($hook !== 'toplevel_page_seitenbilder') return;
+    wp_enqueue_media();
+    wp_enqueue_script('wwd-image-uploader', get_template_directory_uri() . '/admin/image-uploader.js', ['jquery'], null, true);
+});
+
+// 3. Callback: HTML-Formular + Speicherung
+function wwd_seitenbilder_callback() {
+    // Bildschlüssel
+    $fields = [
+        'home_img_1' => 'Homepage Bild 1',
+        'home_img_2' => 'Homepage Bild 2',
+        'home_img_3' => 'Homepage Bild 3',
+        'services_img_1' => 'Leistungen Bild 1',
+        'services_img_2' => 'Leistungen Bild 2',
+        'services_img_3' => 'Leistungen Bild 3',
+        'posts_img_1' => 'Beiträge Bild',
+        'about_img_1' => 'Über mich Bild 1',
+        'about_img_2' => 'Über mich Bild 2',
+    ];
+
+    // Bilder speichern
+    if (isset($_POST['wwd_nonce']) && wp_verify_nonce($_POST['wwd_nonce'], 'wwd_bildspeichern')) {
+        foreach ($fields as $key => $label) {
+            if (isset($_POST[$key])) {
+                update_option($key, esc_url_raw($_POST[$key]));
+            }
+        }
+        echo '<div class="notice notice-success"><p>Bilder gespeichert.</p></div>';
+    }
+
+    // Ausgabe
+    echo '<div class="wrap"><h1>Seitenbilder verwalten</h1><form method="post">';
+    wp_nonce_field('wwd_bildspeichern', 'wwd_nonce');
+
+    foreach ($fields as $key => $label) {
+        $url = esc_url(get_option($key));
+        echo "<h3>$label</h3>";
+        echo "<input type='text' name='$key' value='$url' class='widefat'>";
+        echo "<button class='button wwd-upload-button'>Bild auswählen</button><br>";
+        echo "<img src='$url' style='max-width:300px; margin-top:10px;' " . ($url ? '' : 'style="display:none;"') . "><br><br>";
+    }
+
+    submit_button('Bilder speichern');
+    echo '</form></div>';
+}
+
+
+add_action('admin_enqueue_scripts', function ($hook) {
+    // Nur auf unserer eigenen Seite laden
+    if ($hook !== 'toplevel_page_seitenbilder') return;
+
+    wp_enqueue_media();
+    wp_enqueue_script('wwd-image-uploader', get_template_directory_uri() . '/admin/image-uploader.js', ['jquery'], null, true);
+});
