@@ -1,29 +1,28 @@
 function lade_stylesheet() {
-    wp_register_style('base' , get_template_directory_uri() . '/css/base.css' , array(), false, 'all');
-    wp_enqueue_style('base');
- 
+    wp_register_style( 'base', get_template_directory_uri() . '/css/base.css' , array(),rand(111,9999), 'all' );
+    wp_enqueue_style( 'base' );
+    wp_register_style( 'braukurse', get_template_directory_uri() . '/css/braukurse.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'braukurse' );
+    wp_register_style( 'index', get_template_directory_uri() . '/css/index.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'index' );
+    wp_register_style( 'hero', get_template_directory_uri() . '/css/hero.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'hero' );
+    wp_register_style( 'laaser-bier', get_template_directory_uri() . '/css/laaser-bier.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'laaser-bier' );
+    wp_register_style( 'shop', get_template_directory_uri() . '/css/shop.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'shop' );
+    wp_register_style( 'nav', get_template_directory_uri() . '/css/nav.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'nav' );
+    wp_register_style( 'speisekarte-slider', get_template_directory_uri() . '/css/speisekarte-slider.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'speisekarte-slider' );
+    wp_register_style( 'veranstaltungen', get_template_directory_uri() . '/css/veranstaltungen.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'veranstaltungen' );
+    wp_register_style( 'footer', get_template_directory_uri() . '/css/footer.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'footer' );
+    wp_register_style( 'single', get_template_directory_uri() . '/css/single.css' , array(),rand(111,9999), 'all'  );
+    wp_enqueue_style( 'single' );
+
+
 }
-add_action('wp_enqueue_scripts', 'lade_stylesheet');
 
-
-// base ist der CSS datei Name, durch Datei Namen ersetzen
-// /css/base.css ist der CSS datei Pfad, durch CSS datei Pfad ersetzen
-
-// für jede einzelne css Datei neuen wp_register_style und wp_enqueue_style anlegen. Aber in der gleichen Funktion
-
-
-Bsp für mehrere CSS Dateien :
-
-function lade_stylesheet() {
-    wp_register_style('base' , get_template_directory_uri() . '/css/base.css' , array(), false, 'all');
-    wp_enqueue_style('base');
-    wp_register_style('index' , get_template_directory_uri() . '/css/index.css' , array(), false, 'all');
-    wp_enqueue_style('index');
-    wp_register_style('nav' , get_template_directory_uri() . '/css/nav.css' , array(), false, 'all');
-    wp_enqueue_style('nav');
-    wp_register_style('start' , get_template_directory_uri() . '/css/start.css' , array(), false, 'all');
-    wp_enqueue_style('start');
-    wp_register_style('blogeintrag' , get_template_directory_uri() . '/css/blogeintrag.css' , array(), false, 'all');
-    wp_enqueue_style('blogeintrag');
-}
-add_action('wp_enqueue_scripts', 'lade_stylesheet');
+add_action( 'wp_enqueue_scripts', 'lade_stylesheet' );
