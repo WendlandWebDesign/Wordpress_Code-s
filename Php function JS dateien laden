@@ -1,25 +1,18 @@
-function lade_javascript() {
-    wp_register_script('base', get_template_directory_uri() .'/javascript/base.js', '', 1, true) ;
-    wp_enqueue_script('base');
+function mein_theme_scripts() {
+    // JS-Datei mit Cache-Busting über filemtime()
+    wp_enqueue_script(
+        'nav-js', // Handle
+        get_template_directory_uri() . '/javascript/nav.js', // Pfad zur Datei 
+        [], // Abhängigkeiten
+        filemtime(get_template_directory() . '/javascript/nav.js'), // Version = Änderungszeitpunkt
+        true // Im Footer laden
+    );
+    wp_enqueue_script(
+        'slider-js', // Handle
+        get_template_directory_uri() . '/javascript/slider.js', // Pfad zur Datei 
+        [], // Abhängigkeiten
+        filemtime(get_template_directory() . '/javascript/slider.js'), // Version = Änderungszeitpunkt
+        true // Im Footer laden
+    );
 }
-
-add_action('wp_enqueue_scripts', 'lade_javascript',);
-
-// base ist der JS datei Name, durch Datei Namen ersetzen
-// /javascript/base.js ist der JS Datei Pfad, durch JS datei Pfad ersetzen
-
-// für jede einzelne JS Datei neuen wp_register_script und wp_enqueue_script anlegen. Aber in der gleichen Funktion.-
-
-
-
-
-Bsp. für mehrere JS dateien:
-
-function lade_javascript() {
-    wp_register_script('base', get_template_directory_uri() .'/javascript/base.js', '', 1, true) ;
-    wp_enqueue_script('base');
-    wp_register_script('index', get_template_directory_uri() .'/javascript/index.js', '', 1, true) ;
-    wp_enqueue_script('index');
-}
-
-add_action('wp_enqueue_scripts', 'lade_javascript',);
+add_action('wp_enqueue_scripts', 'mein_theme_scripts');
